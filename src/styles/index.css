@@ -29,6 +29,18 @@ body{
     text-align: center;
 }
 
+.dots{
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 10px;
+    font-size: 70px;
+    font-weight: 600;
+    width: 70px;
+    height: 100px;
+    text-align: center;
+}
+
 .second{
     display: flex;
     justify-content: center;
