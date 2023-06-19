@@ -6,7 +6,32 @@ import ReactDOM from "react-dom";
 import "../styles/index.css";
 
 //import your own components
-import Home from "./component/home.jsx";
+import Main from "./component/Main.jsx";
 
-//render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+var numberToShow = ['0','0','0','0','0','0'];
+var intervalId;
+var seconds = 0;
+
+window.onload = startTimer();
+
+// Split the seconds adding '0' to the left to fix the six positions of the array
+function digitsToArray(){
+    numberToShow = Array.from(String(seconds).padStart(6,'0'));
+    return numberToShow;
+}
+
+function startTimer(){
+    intervalId = setInterval(updateTimer, 1000)
+    updateTimer();
+}
+
+function updateTimer(){
+    digitsToArray();
+    //console.log(numberToShow);
+    ReactDOM.render(<Main/>, document.querySelector("#app"));
+    
+    seconds++;
+}
+
+export{numberToShow};
+
