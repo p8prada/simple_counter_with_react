@@ -7,10 +7,13 @@ import "../styles/index.css";
 
 //import your own components
 import Main from "./component/Main.jsx";
+import { func } from "prop-types";
+import { SecondsCounter } from "./component/SecondsCounter";
 
 var numberToShow = ['0','0','0','0','0','0'];
 var intervalId;
 var seconds = 0;
+var countAlert = 0;
 
 window.onload = startTimer();
 
@@ -25,13 +28,59 @@ function startTimer(){
     updateTimer();
 }
 
+function stopTimer(){
+    clearInterval(intervalId);
+}
+
 function updateTimer(){
+    checkForAlert();
     digitsToArray();
-    //console.log(numberToShow);
     ReactDOM.render(<Main/>, document.querySelector("#app"));
-    
     seconds++;
 }
+
+function checkForAlert(){
+    if(countAlert !== 0){
+        if(seconds === countAlert){
+            console.log(seconds + " " + countAlert);
+            stopTimer();
+            document.getElementById("alert").style.display = "block";
+        }
+    }
+}
+
+var stop = document.getElementById("stop");
+var reset = document.getElementById("reset");
+var start = document.getElementById("start");
+
+var alert = document.getElementById("alertAt");
+var countdown = document.getElementById("countdown");
+
+stop.addEventListener("click", function(){
+    stopTimer();
+});
+
+reset.addEventListener("click", function(){
+    seconds = 0;
+    updateTimer();
+});
+
+start.addEventListener("click", function(){
+    stopTimer();
+    seconds--;
+    startTimer();
+});
+
+
+document.getElementById("startAlert").addEventListener("click", function(){
+    stopTimer();
+    seconds = 0;
+    console.log(parseInt(alert.textContent));
+    countAlert = parseInt(alert.textContent);
+    startTimer();
+});
+
+
 
 export{numberToShow};
 
