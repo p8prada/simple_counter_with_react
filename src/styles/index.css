@@ -59,3 +59,8 @@ body{
     height: 100px;
     text-align: center;
 }
+
+.alert{
+    font-size: 40px;
+    font-weight: bold;
+}

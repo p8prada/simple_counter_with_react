@@ -29,6 +29,3 @@ export function SecondsCounter(props){
 SecondsCounter.propTypes = {
 	number: PropTypes.string,
 };
-
-// export default CounterContainer;
-// export default SecondsCounter;
