@@ -16,18 +16,18 @@ const Options = () => {
             </div>
 
             <div className="row mt-5 d-flex justify-content-end">
-                <div className="col-6 d-grid gap-2 d-flex justify-content-end align-items-center">
+                <div id="optionAlert" className="col-6 d-grid gap-2 d-flex justify-content-end align-items-center">
                     <label className="text-white" for="AlertAt">Get an alert at: </label>
-                    <input id="alertAt" name="alertAt" type="text" style={{width: "60px"}} ></input>
+                    <input id="alertAt" className="d-flex justify-content-center" name="alertAt" type="text" style={{width: "60px"}} ></input>
                     <button type="button" id="startAlert" className="btn btn-success" style={{width: "70px"}}>Start</button>
                 </div>
 
             </div>
 
             <div className="row mt-3 d-flex justify-content-end">
-                <div className="col-6 d-grid gap-2 d-flex justify-content-end align-items-center">
+                <div id="optionCountdown" className="col-6 d-grid gap-2 d-flex justify-content-end align-items-center">
                     <label className="text-white" for="countdown">Countdown from: </label>
-                    <input id="countdown" name="countdown" type="text" style={{width: "60px"}} ></input>
+                    <input id="countdown" className="d-flex justify-content-center" name="countdown" type="text" style={{width: "60px"}} ></input>
                     <button type="button" id="startCountdown" className="btn btn-success" style={{width: "70px"}}>Start</button>
                 </div>
             </div>

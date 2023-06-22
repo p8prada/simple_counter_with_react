@@ -7,13 +7,12 @@ import "../styles/index.css";
 
 //import your own components
 import Main from "./component/Main.jsx";
-import { ContextExclusionPlugin } from "webpack";
 
 var numberToShow = ['0','0','0','0','0','0'];
 var intervalId;
 var seconds = 0;
 var countAlert = 0;
-var flag = 1;
+var counter = "up";
 
 window.onload = startTimerUp();
 
@@ -63,13 +62,78 @@ function updateTimerDown(){
     seconds--;
 }
 
+stop.addEventListener("click", function(){
+    stopTimer();
+});
+
+reset.addEventListener("click", function(){
+    seconds = 0;
+    countdown.value = "";
+    alert.value = "";
+    countAlert = 0;
+    document.getElementById("optionAlert").classList.remove("d-none");
+    document.getElementById("optionCountdown").classList.remove("d-none");
+    checkStartButton();
+    alertDisplay();
+    stopTimer();
+    startTimerUp();
+});
+
+start.addEventListener("click", function(){
+    stopTimer();
+    if(counter === "up"){
+        seconds--;
+        startTimerUp();
+    }else{
+        seconds++;
+        startTimerDown();
+    }
+});
+
+document.getElementById("startAlert").addEventListener("click", function(){
+    stopTimer();
+    seconds = 0;
+    countAlert = parseInt(alert.value);
+    countdown.value = "";
+    counter = "up";
+    alertDisplay();
+    checkStartButton();
+    document.getElementById("optionCountdown").classList.add("d-none");
+    startTimerUp();
+});
+
+document.getElementById("startCountdown").addEventListener("click", function(){
+    stopTimer();
+    seconds = parseInt(countdown.value);
+    alert.value = "";
+    counter = "down";
+    alertDisplay();
+    checkStartButton();
+    document.getElementById("optionAlert").classList.add("d-none");
+    startTimerDown();
+});
+
+
+function alertDisplay(){
+    if (!document.getElementById("alert").classList.contains("d-none")){
+        document.getElementById("alert").classList.add("d-none");
+    }
+}
+
+function checkStartButton(){
+    if (document.getElementById("start").classList.contains("d-none")){
+        document.getElementById("start").classList.remove("d-none");
+    }
+}
+
 function checkForAlert(){
     if(countAlert !== 0){
         if(seconds === countAlert){
             stopTimer();
             document.getElementById("alert").classList.add("alert-success");
             document.getElementById("alert").classList.toggle("d-none");
-            start.classList.remove("d-none");
+            counter = "up";
+            document.getElementById("start").classList.toggle("d-none");
         }
     }
 }
@@ -79,50 +143,10 @@ function countDownCheck(){
         stopTimer();
         document.getElementById("alert").classList.add("alert-danger");
         document.getElementById("alert").classList.toggle("d-none");
-        start.classList.remove("d-none");
+        counter = "up";
+        document.getElementById("start").classList.toggle("d-none");
     }
 }
-
-function alertDisplay(){
-    if (!document.getElementById("alert").classList.contains("d-none")){
-        document.getElementById("alert").classList.add("d-none");
-    }
-}
-
-stop.addEventListener("click", function(){
-    stopTimer();
-});
-
-reset.addEventListener("click", function(){
-    seconds = 0;
-    countdown.value = "";
-    alert.value = "";
-    updateTimerUp();
-});
-
-start.addEventListener("click", function(){
-    stopTimer();
-    console.log(seconds);
-    if(seconds > 0){seconds--;};
-    startTimerUp();
-});
-
-document.getElementById("startAlert").addEventListener("click", function(){
-    stopTimer();
-    seconds = 0;
-    countAlert = parseInt(alert.value);
-    alertDisplay();
-    document.getElementById("start").classList.add("d-none");
-    startTimerUp();
-});
-
-document.getElementById("startCountdown").addEventListener("click", function(){
-    stopTimer();
-    seconds = parseInt(countdown.value);
-    alertDisplay();
-    document.getElementById("start").classList.add("d-none");
-    startTimerDown();
-});
 
 export{numberToShow};
 
